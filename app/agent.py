@@ -37,14 +37,14 @@ INSTRUCTIONS = """\
 - 宿題の答えそのものは書かず、考え方のヒントで導く。
 """
 
-# モデルは実行時に渡す（テストではAPIを呼ばない TestModel に差し替えるため）
+# Pass the model at runtime so tests can substitute TestModel, which does not call the API.
 agent = Agent(instructions=INSTRUCTIONS)
 agent.tool_plain(tools.search_glossary)
 agent.tool_plain(tools.get_lecture_summary)
 
-# TODO(第3回 演習): tools.py に make_quiz を作り、ここで登録しよう
+# TODO (Session 3 exercise): Create make_quiz in tools.py and register it here.
 
-# 第5回: 使う MCP サーバーの設定ファイル。Claude Desktop や Cursor と同じ "mcpServers" 形式
+# Session 5: MCP server configuration file, using the same "mcpServers" format as Claude Desktop and Cursor.
 MCP_CONFIG = Path(__file__).resolve().parent / "mcp_servers.json"
 
 

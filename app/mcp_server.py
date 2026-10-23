@@ -17,17 +17,17 @@ from mcp.server.mcpserver import MCPServer
 
 from app import tools
 
-# サーバーの名前と説明。クライアントに表示される（設定ファイル側のキー "glossary" とは別物）
+# Server name and instructions, displayed to clients (distinct from the "glossary" key in the config file).
 server = MCPServer(
     "aie2026-glossary",
     instructions="AIE2026（AIエンジニアリング実践講座）の用語集と各回の要点を提供する。",
 )
 
-# 第3回と同じ関数を、そのまま MCP のツールとして公開する。docstring と型ヒントが説明文になる
+# Expose the same function from Session 3 as an MCP tool; its docstring and type hints become the description.
 server.tool()(tools.search_glossary)
 
-# TODO(第5回 演習): tools.get_lecture_summary も公開しよう（上の1行と同じ書き方）
-# 第3回で make_quiz を作った人は、それも公開できる
+# TODO (Session 5 exercise): Expose tools.get_lecture_summary as well (using the same pattern as the line above).
+# If you created make_quiz in Session 3, you can expose that too.
 
 
 def main() -> None:
@@ -38,7 +38,7 @@ def main() -> None:
         print("MCP サーバーを http://127.0.0.1:8000/mcp で起動します（Ctrl+C で停止）")
         server.run(transport="streamable-http")
     else:
-        # stdio では標準出力がプロトコルの通信路になるので、print してはいけない
+        # With stdio, standard output carries the protocol, so do not print to it.
         server.run()
 
 

@@ -40,7 +40,7 @@ def search_glossary(query: str) -> str:
     glossary = load_glossary()
 
     exact = [e for e in glossary if q in _names(e)]
-    # 「r」のような短い別名が何にでも当たらないよう、名前側が短いものは除く
+    # Exclude short names so short aliases like "r" do not match everything.
     partial = [
         e for e in glossary
         if e not in exact and any(q in n or (len(n) >= 3 and n in q) for n in _names(e))
