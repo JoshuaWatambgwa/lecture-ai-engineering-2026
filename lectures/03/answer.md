@@ -1,15 +1,15 @@
-# 第3回 解答
+# Lecture 3 Answer
 
-## 演習
+## Exercise
 
-- 第1回（素のLLM）とエージェントの回答の違い：
-- `--trace` で見えたツール呼び出し（ツール名と引数）：
-- 1つの質問での LLM 呼び出し回数（`requests`）：
-- 追加したツールと、docstring に書いた説明：
+- Difference between the responses of the base LLM in lecture 1 and the agent:
+- Tool calls visible with `--trace` (tool name and arguments):
+- Number of LLM calls in a single question (`requests`):
+- The added tools and the explanations written in the docstrings:
 
-## 宿題
+## Homework
 
-- 取り組んだレベル：基礎 / 実装 / 発展
-- やったこと：
-- 結果：
-- 気づき・疑問：
+- Level attempted: Basic / Implementation / Advanced
+- What I did:
+- Result:
+- Observations / questions:

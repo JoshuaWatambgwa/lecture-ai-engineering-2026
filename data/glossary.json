@@ -1,528 +1,877 @@
 {
   "version": "2026-draft-1",
-  "note": "AIE2026 第1〜3回・第5回の用語集（たたき台）。講義スライド確定後に内容を差し替える。",
+  "note": "AIE2026 draft glossary for lectures 1–3 and 5. Replace the content after the lecture slides are finalized.",
   "terms": [
     {
       "id": "ai-engineering",
-      "term": "AIエンジニアリング",
-      "aliases": ["AI Engineering"],
+      "term": "AI Engineering",
+      "aliases": [
+        "AI Engineering"
+      ],
       "lecture": 1,
-      "category": "全体像",
-      "definition": "学習済みの基盤モデル（主にLLM）を部品として使い、実際に役立つアプリケーションやシステムを設計・構築・評価・運用する技術領域。モデルを一から作ることより、モデルの選択、データやツールとの接続、評価と改善のサイクルを回すことに重心がある。",
-      "related": ["llm", "evaluation-loop"]
+      "category": "Big Picture",
+      "definition": "The technical field of designing, building, evaluating, and operating useful applications and systems by using pretrained foundation models (mainly LLMs) as components. The focus is less on creating a model from scratch and more on selecting models, connecting them to data and tools, and running an evaluation-and-improvement cycle.",
+      "related": [
+        "llm",
+        "evaluation-loop"
+      ]
     },
     {
       "id": "evaluation-loop",
-      "term": "評価と改善のサイクル",
-      "aliases": ["改善サイクル"],
+      "term": "Evaluation and Improvement Cycle",
+      "aliases": [
+        "Improvement cycle"
+      ],
       "lecture": 1,
-      "category": "全体像",
-      "definition": "作る→測る→直すを繰り返す開発の進め方。AIアプリは出力が確率的に揺れるため、感覚ではなく評価データや指標で良し悪しを判断し、その結果をもとにプロンプト・データ・モデル・ツールを改善する。本講座では学習支援エージェントを題材に、回をまたいでこのサイクルを回す。",
-      "related": ["ai-engineering", "hallucination"]
+      "category": "Big Picture",
+      "definition": "A development approach that repeats build → measure → fix. Because AI application outputs vary probabilistically, quality is judged using evaluation data and metrics rather than intuition; the results are used to improve prompts, data, models, and tools. In this course, we use a learning-support agent as the topic and continue this cycle across multiple lectures.",
+      "related": [
+        "ai-engineering",
+        "hallucination"
+      ]
     },
     {
       "id": "llm",
-      "term": "LLM（大規模言語モデル）",
-      "aliases": ["大規模言語モデル", "Large Language Model"],
+      "term": "LLM (Large Language Model)",
+      "aliases": [
+        "Large Language Model"
+      ],
       "lecture": 1,
-      "category": "LLM基礎",
-      "definition": "大量のテキストで学習し、入力に続くトークンを予測することで文章を生成するモデル。質問応答、要約、コード生成など多くのタスクを、指示（プロンプト）を変えるだけでこなせる。",
-      "related": ["token", "prompt", "pretraining"]
+      "category": "LLM Fundamentals",
+      "definition": "A model trained on a large amount of text that predicts the next token given the input and generates text. It can handle many tasks, such as question answering, summarization, and code generation, simply by changing the instructions (prompt).",
+      "related": [
+        "token",
+        "prompt",
+        "pretraining"
+      ]
     },
     {
       "id": "token",
-      "term": "トークン",
-      "aliases": ["token"],
+      "term": "Token",
+      "aliases": [
+        "token"
+      ],
       "lecture": 1,
-      "category": "LLM基礎",
-      "definition": "LLMがテキストを扱う最小単位。単語や文字の断片に分割される。APIの料金、レート制限、コンテキストウィンドウの大きさは、多くの場合トークン数で数える。日本語は英語より1文字あたりのトークン数が多くなりやすい。",
-      "related": ["context-window", "rate-limit"]
+      "category": "LLM Fundamentals",
+      "definition": "The smallest unit of text handled by an LLM. It is split into fragments of words or characters. API costs, rate limits, and context window size are often counted in tokens. Japanese text tends to use more tokens per character than English.",
+      "related": [
+        "context-window",
+        "rate-limit"
+      ]
     },
     {
       "id": "context-window",
-      "term": "コンテキストウィンドウ",
-      "aliases": ["コンテキスト長", "context window"],
+      "term": "Context Window",
+      "aliases": [
+        "Context length",
+        "context window"
+      ],
       "lecture": 1,
-      "category": "LLM基礎",
-      "definition": "LLMが1回の呼び出しで扱える入力と出力の合計トークン数の上限。会話履歴やツールの結果もこの中に収める必要があるため、何をモデルに渡すかの設計が重要になる。",
-      "related": ["token", "agent-loop"]
+      "category": "LLM Fundamentals",
+      "definition": "The maximum total number of input and output tokens that an LLM can handle in a single call. Since conversation history and tool results also need to fit within this limit, designing what to pass to the model is crucial.",
+      "related": [
+        "token",
+        "agent-loop"
+      ]
     },
     {
       "id": "prompt",
-      "term": "プロンプト",
-      "aliases": ["prompt"],
+      "term": "Prompt",
+      "aliases": [
+        "prompt"
+      ],
       "lecture": 1,
-      "category": "LLM基礎",
-      "definition": "LLMに渡す入力文。質問だけでなく、役割、制約、出力形式、例などを含めることで出力を方向づけられる。",
-      "related": ["system-prompt", "llm"]
+      "category": "LLM Fundamentals",
+      "definition": "The input text passed to an LLM. It can contain not only the question but also the role, constraints, output format, examples, and more to guide the model output.",
+      "related": [
+        "system-prompt",
+        "llm"
+      ]
     },
     {
       "id": "system-prompt",
-      "term": "システムプロンプト",
-      "aliases": ["指示文", "instructions", "system instruction"],
+      "term": "System Prompt",
+      "aliases": [
+        "Instruction",
+        "instructions",
+        "system instruction"
+      ],
       "lecture": 1,
-      "category": "LLM基礎",
-      "definition": "利用者の質問とは別に、モデルの振る舞い（役割、口調、守るべきルールなど）を指定する入力。Pydantic AIでは Agent の instructions 引数で与える。",
-      "related": ["prompt", "guardrail"]
+      "category": "LLM Fundamentals",
+      "definition": "Input provided separately from the user question to specify the model behavior (role, tone, rules to follow, etc.). In Pydantic AI, this is passed via the Agent instructions argument.",
+      "related": [
+        "prompt",
+        "guardrail"
+      ]
     },
     {
       "id": "temperature",
-      "term": "temperature",
-      "aliases": ["温度パラメータ"],
+      "term": "Temperature",
+      "aliases": [
+        "Temperature parameter"
+      ],
       "lecture": 1,
-      "category": "LLM基礎",
-      "definition": "次のトークンを選ぶときのランダムさを調整する設定値。低いほど出力が安定し、高いほど多様になる。同じ質問でも回答が変わる理由の一つ。",
-      "related": ["llm", "evaluation-loop"]
+      "category": "LLM Fundamentals",
+      "definition": "A setting that controls the randomness when choosing the next token. Lower values make outputs more stable, while higher values make them more diverse. It is one reason the same question can produce different answers.",
+      "related": [
+        "llm",
+        "evaluation-loop"
+      ]
     },
     {
       "id": "hallucination",
-      "term": "ハルシネーション",
-      "aliases": ["幻覚", "hallucination"],
+      "term": "Hallucination",
+      "aliases": [
+        "hallucination",
+        "illusion"
+      ],
       "lecture": 1,
-      "category": "LLM基礎",
-      "definition": "LLMが事実と異なる内容や存在しない情報を、もっともらしく生成してしまう現象。モデルが知らないこと（最新情報、組織や講座に固有の情報など）を聞いたときに起きやすい。外部データをツールで参照させる、根拠を示させる、評価で検出する、などで抑える。",
-      "related": ["tool", "evaluation-loop"]
+      "category": "LLM Fundamentals",
+      "definition": "A phenomenon in which an LLM generates content that contradicts facts or invents information in a convincing way. It is more likely to occur when the model is asked about things it does not know, such as up-to-date information or course-specific details. It can be reduced by having the model reference external data through tools, provide evidence, and detect it through evaluation.",
+      "related": [
+        "tool",
+        "evaluation-loop"
+      ]
     },
     {
       "id": "api",
       "term": "API",
-      "aliases": ["Application Programming Interface", "Web API"],
+      "aliases": [
+        "Application Programming Interface",
+        "Web API"
+      ],
       "lecture": 1,
-      "category": "開発基礎",
-      "definition": "プログラムから別のサービスの機能を呼び出すための窓口。本講座ではGemini APIをPythonから呼び出してLLMを使う。",
-      "related": ["api-key", "rate-limit"]
+      "category": "Development Basics",
+      "definition": "A gateway for programs to call functions exposed by another service. In this course, we use the Gemini API from Python to use the LLM.",
+      "related": [
+        "api-key",
+        "rate-limit"
+      ]
     },
     {
       "id": "api-key",
-      "term": "APIキー",
-      "aliases": ["API key"],
+      "term": "API Key",
+      "aliases": [
+        "API key"
+      ],
       "lecture": 1,
-      "category": "開発基礎",
-      "definition": "APIを呼び出す人を識別するための秘密の文字列。漏れると他人に利用枠を使われるため、コードに直接書かない、コミットしない、チャットに貼らない。本講座ではCodespaces secretに登録し、環境変数 GEMINI_API_KEY として読み込む。",
-      "related": ["codespaces-secret", "environment-variable"]
+      "category": "Development Basics",
+      "definition": "A secret string used to identify who is calling the API. If it leaks, others can consume your quota. Do not write it directly in code, do not commit it, and do not paste it into chat. In this course, we register it as a Codespaces secret and load it as the environment variable GEMINI_API_KEY.",
+      "related": [
+        "codespaces-secret",
+        "environment-variable"
+      ]
     },
     {
       "id": "environment-variable",
-      "term": "環境変数",
-      "aliases": ["environment variable", "env"],
+      "term": "Environment Variable",
+      "aliases": [
+        "environment variable",
+        "env"
+      ],
       "lecture": 1,
-      "category": "開発基礎",
-      "definition": "プログラムの外側（OSや実行環境）で設定し、プログラムから名前で読み出せる値。APIキーのような秘密情報や、環境ごとに変わる設定をコードから切り離すために使う。",
-      "related": ["api-key", "codespaces-secret"]
+      "category": "Development Basics",
+      "definition": "A value set outside the program (in the OS or runtime environment) and read by the program by name. It is used to keep secrets such as API keys and environment-specific settings separate from code.",
+      "related": [
+        "api-key",
+        "codespaces-secret"
+      ]
     },
     {
       "id": "rate-limit",
-      "term": "レート制限",
-      "aliases": ["rate limit", "429エラー"],
+      "term": "Rate Limit",
+      "aliases": [
+        "rate limit",
+        "HTTP 429 error"
+      ],
       "lecture": 1,
-      "category": "開発基礎",
-      "definition": "一定時間あたりに呼び出せるリクエスト数やトークン数の上限。超えるとHTTP 429などのエラーが返る。無料枠は特に制限が厳しく、エージェントは1つの質問で複数回LLMを呼ぶため上限に達しやすい。",
-      "related": ["api", "agent-loop", "default-model"]
+      "category": "Development Basics",
+      "definition": "The maximum number of requests or tokens allowed within a given time period. Exceeding it returns errors such as HTTP 429. Free tiers are especially strict, and agents often hit the limit because they call the LLM multiple times for one question.",
+      "related": [
+        "api",
+        "agent-loop",
+        "default-model"
+      ]
     },
     {
       "id": "codespaces",
       "term": "GitHub Codespaces",
-      "aliases": ["Codespaces", "コードスペース"],
+      "aliases": [
+        "Codespaces",
+        "code spaces"
+      ],
       "lecture": 1,
-      "category": "開発環境",
-      "definition": "GitHubが提供するクラウド上の開発環境。ブラウザからVS Codeを開き、repoに書かれた設定どおりの環境をすぐに使える。個人アカウントには毎月の無料枠があり、使わないときは停止しないと枠を消費し続ける。",
-      "related": ["devcontainer", "codespaces-secret"]
+      "category": "Development Environment",
+      "definition": "A cloud-based development environment provided by GitHub. You can open VS Code in the browser and immediately use an environment configured according to the repository settings. Personal accounts have a free monthly quota, and if you do not stop the environment, usage continues to be consumed.",
+      "related": [
+        "devcontainer",
+        "codespaces-secret"
+      ]
     },
     {
       "id": "devcontainer",
       "term": "devcontainer",
-      "aliases": ["Dev Container", "devcontainer.json"],
+      "aliases": [
+        "Dev Container",
+        "devcontainer.json"
+      ],
       "lecture": 1,
-      "category": "開発環境",
-      "definition": "開発環境をコンテナとして定義する仕組み。.devcontainer/devcontainer.json にPythonのバージョンや拡張機能、起動時のコマンドを書いておくと、誰がCodespacesを開いても同じ環境になる。",
-      "related": ["codespaces"]
+      "category": "Development Environment",
+      "definition": "A mechanism for defining a development environment as a container. By writing the Python version, extensions, and startup commands in .devcontainer/devcontainer.json, the same environment is available regardless of who opens Codespaces.",
+      "related": [
+        "codespaces"
+      ]
     },
     {
       "id": "codespaces-secret",
-      "term": "Codespaces secret",
-      "aliases": ["Codespacesのシークレット"],
+      "term": "Codespaces Secret",
+      "aliases": [
+        "Codespaces secret"
+      ],
       "lecture": 1,
-      "category": "開発環境",
-      "definition": "GitHubのアカウント設定に登録しておく秘密の値。指定したrepoのCodespacesを起動すると環境変数として渡される。登録時に使うrepo（自分のfork）を選ぶ必要がある。起動中に登録した場合はCodespacesの再起動が必要。",
-      "related": ["api-key", "environment-variable", "codespaces"]
+      "category": "Development Environment",
+      "definition": "A secret value registered in GitHub account settings. It is passed to the environment when a specified repository's Codespaces is started. You must choose the repository to use when registering it (your own fork). If you register it while a Codespace is running, you need to restart the Codespace.",
+      "related": [
+        "api-key",
+        "environment-variable",
+        "codespaces"
+      ]
     },
     {
       "id": "fork",
-      "term": "fork",
-      "aliases": ["フォーク"],
+      "term": "Fork",
+      "aliases": [
+        "fork"
+      ],
       "lecture": 1,
       "category": "Git/GitHub",
-      "definition": "他人のrepoを自分のアカウントに丸ごとコピーすること。本講座では講座repoをforkし、自分のfork上で作業・提出する。",
-      "related": ["branch", "pull-request"]
+      "definition": "A complete copy of someone else's repository under your own account. In this course, we fork the course repository and do our work and submissions on our own fork.",
+      "related": [
+        "branch",
+        "pull-request"
+      ]
     },
     {
       "id": "branch",
-      "term": "ブランチ",
-      "aliases": ["branch"],
+      "term": "Branch",
+      "aliases": [
+        "branch"
+      ],
       "lecture": 1,
       "category": "Git/GitHub",
-      "definition": "作業の流れを分けるための仕組み。main を壊さずに変更を試し、まとまったらPRで main に取り込む。本講座では回ごとに lec01 のような作業ブランチを作る。",
-      "related": ["pull-request", "fork"]
+      "definition": "A mechanism for separating work streams. You can try changes without breaking main and then merge them via PR. In this course, we create work branches such as lec01 for each lecture.",
+      "related": [
+        "pull-request",
+        "fork"
+      ]
     },
     {
       "id": "pull-request",
-      "term": "プルリクエスト（PR）",
-      "aliases": ["PR", "Pull Request"],
+      "term": "Pull Request (PR)",
+      "aliases": [
+        "PR",
+        "Pull Request"
+      ],
       "lecture": 1,
       "category": "Git/GitHub",
-      "definition": "あるブランチの変更を別のブランチへ取り込むよう依頼する仕組み。差分の確認、コメント、自動テストの結果表示ができる。本講座の提出は、自分のfork内で作業ブランチから main へのPRとして行う。",
-      "related": ["branch", "answer-md"]
+      "definition": "A mechanism for requesting that changes from one branch be merged into another. It supports diff review, comments, and display of automated test results. In this course, submissions are made as PRs from a work branch in your fork to main.",
+      "related": [
+        "branch",
+        "answer-md"
+      ]
     },
     {
       "id": "github-copilot",
       "term": "GitHub Copilot",
-      "aliases": ["Copilot"],
+      "aliases": [
+        "Copilot"
+      ],
       "lecture": 1,
-      "category": "AIコーディング",
-      "definition": "GitHubのAIコーディング支援。エディタでのコード補完、チャットでの質問、エージェントモードでの複数ファイル編集などができる。無料のCopilot Freeは補完の回数とチャットの利用量に上限がある。",
-      "related": ["code-completion", "coding-agent"]
+      "category": "AI Coding",
+      "definition": "GitHub's AI coding assistant. It supports code completion in the editor, chat-based Q&A, and multi-file editing in agent mode. Copilot Free has limits on the number of completions and chat usage.",
+      "related": [
+        "code-completion",
+        "coding-agent"
+      ]
     },
     {
       "id": "code-completion",
-      "term": "コード補完",
-      "aliases": ["インライン補完", "inline suggestion"],
+      "term": "Code Completion",
+      "aliases": [
+        "Inline completion",
+        "inline suggestion"
+      ],
       "lecture": 1,
-      "category": "AIコーディング",
-      "definition": "書きかけのコードやコメントから、続きのコードをAIが提案する機能。Tabキーなどで受け入れる。提案は正しいとは限らないので、読んで理解してから採用する。",
-      "related": ["github-copilot"]
+      "category": "AI Coding",
+      "definition": "A feature in which AI suggests the rest of code based on partially written code or comments. It is accepted with Tab. Suggestions are not always correct, so read and understand them before adopting them.",
+      "related": [
+        "github-copilot"
+      ]
     },
     {
       "id": "coding-agent",
-      "term": "コーディングエージェント",
-      "aliases": ["Coding Agent", "AIコーディングエージェント"],
+      "term": "Coding Agent",
+      "aliases": [
+        "Coding Agent",
+        "AI Coding Agent"
+      ],
       "lecture": 1,
-      "category": "AIコーディング",
-      "definition": "ファイルの読み書きやコマンド実行をツールとして使い、指示されたプログラミング作業を複数ステップで自律的に進めるAI。Claude Code、Copilotのエージェントモード、Piなどがある。中身はLLM＋ループ＋ツールというAIエージェントの構造そのもの。",
-      "related": ["ai-agent", "harness"]
+      "category": "AI Coding",
+      "definition": "An AI system that uses files and command execution as tools and autonomously works through programming tasks over multiple steps. Examples include Claude Code, Copilot agent mode, and Pi. The underlying structure is the same as AI agents in general: LLM + loop + tools.",
+      "related": [
+        "ai-agent",
+        "harness"
+      ]
     },
     {
       "id": "pretraining",
-      "term": "事前学習",
-      "aliases": ["pre-training", "プレトレーニング"],
+      "term": "Pretraining",
+      "aliases": [
+        "pre-training",
+        "pretraining"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "大量の汎用テキストで、次のトークンを予測するようにモデルを学習させる最初の段階。言語の知識や一般的な常識の多くはここで身につく。",
-      "related": ["fine-tuning", "llm"]
+      "category": "Fine-Tuning",
+      "definition": "The initial stage in which a model is trained on large amounts of general text to predict the next token. Much of a language model's general knowledge and common sense is acquired here.",
+      "related": [
+        "fine-tuning",
+        "llm"
+      ]
     },
     {
       "id": "fine-tuning",
-      "term": "ファインチューニング",
-      "aliases": ["fine-tuning", "追加学習", "FT"],
+      "term": "Fine-Tuning",
+      "aliases": [
+        "fine-tuning",
+        "additional training",
+        "FT"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるのに向く。最新の事実を覚えさせる用途には、ツールやRAGで外部データを参照させるほうが向くことが多い。",
-      "related": ["sft", "peft", "lora"]
+      "category": "Fine-Tuning",
+      "definition": "The process of further training a pretrained model on task-specific or format-specific data. It is useful for adapting output format, tone, or behavior for a particular domain. For learning the latest facts, it is often better to make the model reference external data via tools or RAG than to rely on fine-tuning alone.",
+      "related": [
+        "sft",
+        "peft",
+        "lora"
+      ]
     },
     {
       "id": "sft",
-      "term": "教師ありファインチューニング（SFT）",
-      "aliases": ["SFT", "Supervised Fine-Tuning", "指示チューニング"],
+      "term": "Supervised Fine-Tuning (SFT)",
+      "aliases": [
+        "SFT",
+        "Supervised Fine-Tuning",
+        "instruction tuning"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "入力と望ましい出力のペア（例：質問と模範回答）を使ってモデルを追加学習させる方法。指示に従う振る舞いを身につけさせる代表的な手法。",
-      "related": ["fine-tuning", "lora"]
+      "category": "Fine-Tuning",
+      "definition": "A method of additional training that uses pairs of input and desired output (e.g., questions and examples of ideal answers). It is a representative method for teaching a model to follow instructions.",
+      "related": [
+        "fine-tuning",
+        "lora"
+      ]
     },
     {
       "id": "peft",
       "term": "PEFT",
-      "aliases": ["Parameter-Efficient Fine-Tuning", "パラメータ効率の良いファインチューニング"],
+      "aliases": [
+        "Parameter-Efficient Fine-Tuning",
+        "parameter-efficient fine-tuning"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の総称。必要なGPUメモリと保存容量を大きく減らせる。LoRAが代表例。",
-      "related": ["lora", "fine-tuning"]
+      "category": "Fine-Tuning",
+      "definition": "A general term for methods that train only a small subset of the model's parameters or a small set of added parameters, rather than all model parameters. This substantially reduces required GPU memory and storage. LoRA is the representative example.",
+      "related": [
+        "lora",
+        "fine-tuning"
+      ]
     },
     {
       "id": "lora",
       "term": "LoRA",
-      "aliases": ["Low-Rank Adaptation"],
+      "aliases": [
+        "Low-Rank Adaptation"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
-      "related": ["peft", "lora-rank", "qlora"]
+      "category": "Fine-Tuning",
+      "definition": "A PEFT method that keeps the pretrained weights fixed while representing the update as the product of two small matrices (a low-rank matrix). Only these small matrices are trained. Since the trainable parameters are small, the saved adapter file is also small. We use LoRA in lecture 2's exercises.",
+      "related": [
+        "peft",
+        "lora-rank",
+        "qlora"
+      ]
     },
     {
       "id": "lora-rank",
-      "term": "ランク（LoRAのr）",
-      "aliases": ["rank", "r"],
+      "term": "Rank (LoRA r)",
+      "aliases": [
+        "rank",
+        "r"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。",
-      "related": ["lora"]
+      "category": "Fine-Tuning",
+      "definition": "A hyperparameter that determines the size of the low-rank matrix used in LoRA. Larger values increase expressive power but also increase trainable parameters and memory usage.",
+      "related": [
+        "lora"
+      ]
     },
     {
       "id": "qlora",
       "term": "QLoRA",
-      "aliases": ["Quantized LoRA"],
+      "aliases": [
+        "Quantized LoRA"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
-      "related": ["lora", "quantization"]
+      "category": "Fine-Tuning",
+      "definition": "A method that quantizes the base model weights to 4 bits or similar to save memory, then performs training with LoRA. This allows larger models to run on smaller GPUs. In this course's lecture 2 exercises, we train a model with LoRA and compare memory usage and output differences when loaded in 4-bit mode in the extension tasks.",
+      "related": [
+        "lora",
+        "quantization"
+      ]
     },
     {
       "id": "quantization",
-      "term": "量子化",
-      "aliases": ["quantization"],
+      "term": "Quantization",
+      "aliases": [
+        "quantization"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "モデルの重みを少ないビット数（例：16ビットから4ビット）で表し、メモリ使用量や計算量を減らす技術。精度は少し下がることがある。",
-      "related": ["qlora"]
+      "category": "Fine-Tuning",
+      "definition": "A technique that represents model weights with fewer bits (e.g., 16-bit to 4-bit) to reduce memory usage and computation. Accuracy may decrease slightly.",
+      "related": [
+        "qlora"
+      ]
     },
     {
       "id": "learning-rate",
-      "term": "学習率",
-      "aliases": ["learning rate", "lr"],
+      "term": "Learning Rate",
+      "aliases": [
+        "learning rate",
+        "lr"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "1回の更新でパラメータをどれだけ動かすかを決めるハイパーパラメータ。大きすぎると学習が不安定になり、小さすぎると進みが遅い。",
-      "related": ["epoch", "overfitting"]
+      "category": "Fine-Tuning",
+      "definition": "A hyperparameter that determines how far parameters move in one update. If it is too high, training becomes unstable; if too low, progress is slow.",
+      "related": [
+        "epoch",
+        "overfitting"
+      ]
     },
     {
       "id": "epoch",
-      "term": "エポック",
-      "aliases": ["epoch"],
+      "term": "Epoch",
+      "aliases": [
+        "epoch"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "学習データ全体を1周学習することを1エポックと数える。回数を増やしすぎると過学習しやすい。",
-      "related": ["overfitting", "learning-rate"]
+      "category": "Fine-Tuning",
+      "definition": "A full pass through the entire training dataset counts as one epoch. If the number is increased too much, overfitting becomes more likely.",
+      "related": [
+        "overfitting",
+        "learning-rate"
+      ]
     },
     {
       "id": "overfitting",
-      "term": "過学習",
-      "aliases": ["overfitting", "オーバーフィッティング"],
+      "term": "Overfitting",
+      "aliases": [
+        "overfitting"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
-      "related": ["epoch", "evaluation-loop"]
+      "category": "Fine-Tuning",
+      "definition": "A state in which the model fits the training data too closely and performance drops on unseen inputs. It is noticed by measuring performance on validation data that is not used for training.",
+      "related": [
+        "epoch",
+        "evaluation-loop"
+      ]
     },
     {
       "id": "huggingface-hub",
       "term": "Hugging Face Hub",
-      "aliases": ["Hugging Face", "HF Hub"],
+      "aliases": [
+        "Hugging Face",
+        "HF Hub"
+      ],
       "lecture": 2,
-      "category": "ファインチューニング",
-      "definition": "公開されたモデルやデータセットを共有・ダウンロードできるプラットフォーム。オープンウェイトのモデルを入手したり、LoRAアダプタを公開したりするのに使われる。",
-      "related": ["lora", "pretraining"]
+      "category": "Fine-Tuning",
+      "definition": "A platform for sharing and downloading public models and datasets. It is used to obtain open-weight models and publish LoRA adapters.",
+      "related": [
+        "lora",
+        "pretraining"
+      ]
     },
     {
       "id": "ai-agent",
-      "term": "AIエージェント",
-      "aliases": ["エージェント", "agent"],
+      "term": "AI Agent",
+      "aliases": [
+        "Agent",
+        "agent"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "LLMが自分で判断してツールを呼び出し、その結果を見てさらに次の行動を決める、というループで目的を達成するシステム。基本構造は「モデル＋ループ＋ツール」。",
-      "related": ["agent-loop", "tool", "harness"]
+      "category": "Agents",
+      "definition": "A system in which an LLM decides for itself which tools to call, sees the results, and decides the next action in a loop to achieve a goal. The basic structure is model + loop + tools.",
+      "related": [
+        "agent-loop",
+        "tool",
+        "harness"
+      ]
     },
     {
       "id": "agent-loop",
-      "term": "エージェントループ",
-      "aliases": ["agent loop", "ツール呼び出しループ"],
+      "term": "Agent Loop",
+      "aliases": [
+        "agent loop",
+        "tool-calling loop"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "モデルに入力を渡す→モデルがツール呼び出しを返したら実行する→結果をモデルに戻す、をモデルが最終回答を返すまで繰り返す処理。1つの質問でLLMを複数回呼ぶため、時間・料金・レート制限への影響が大きい。",
-      "related": ["ai-agent", "tool", "rate-limit"]
+      "category": "Agents",
+      "definition": "A process where input is passed to the model, the model returns a tool call, the tool is executed, and the result is returned to the model, repeating until the model returns a final answer. Since one question can trigger multiple LLM calls, the impact on time, cost, and rate limits is significant.",
+      "related": [
+        "ai-agent",
+        "tool",
+        "rate-limit"
+      ]
     },
     {
       "id": "tool",
-      "term": "ツール（Tool use / Function calling）",
-      "aliases": ["ツール呼び出し", "Function calling", "Tool use", "ツール"],
+      "term": "Tool (Tool Use / Function Calling)",
+      "aliases": [
+        "Tool call",
+        "Function calling",
+        "Tool use",
+        "tool"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "モデルが呼び出せるように用意した関数。モデルはツールの名前・説明・引数の型を見て、必要なときに引数を決めて呼び出しを依頼し、実行はプログラム側が行う。検索、計算、ファイル操作、外部APIの呼び出しなどに使う。",
-      "related": ["tool-description", "agent-loop"]
+      "category": "Agents",
+      "definition": "A function prepared so that the model can call it. The model sees the tool name, description, and argument types, decides when to call it and with which arguments, and the program executes it. It is used for searches, calculations, file operations, and external API calls.",
+      "related": [
+        "tool-description",
+        "agent-loop"
+      ]
     },
     {
       "id": "tool-description",
-      "term": "ツールの説明文",
-      "aliases": ["docstring", "ツールスキーマ", "tool schema"],
+      "term": "Tool Description",
+      "aliases": [
+        "docstring",
+        "tool schema"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "ツールの用途や引数の意味をモデルに伝える文章。Pydantic AIでは関数のdocstringと型ヒントから自動で作られる。モデルはこれを読んでツールを使うか、どの引数で呼ぶかを決めるので、書き方次第で挙動が大きく変わる。",
-      "related": ["tool", "pydantic-ai"]
+      "category": "Agents",
+      "definition": "The text that explains the purpose of the tool and the meaning of its arguments to the model. In Pydantic AI, it is automatically generated from the function's docstring and type hints. Because the model reads this to decide whether to use the tool and which arguments to pass, the wording can significantly change behavior.",
+      "related": [
+        "tool",
+        "pydantic-ai"
+      ]
     },
     {
       "id": "structured-output",
-      "term": "構造化出力",
-      "aliases": ["structured output", "JSON出力"],
+      "term": "Structured Output",
+      "aliases": [
+        "structured output",
+        "JSON output"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "モデルの出力を、決めた型やJSONスキーマに沿った形で受け取る仕組み。プログラムで後処理しやすくなる。Pydantic AIでは output_type にPydanticモデルを指定する。",
-      "related": ["pydantic-ai"]
+      "category": "Agents",
+      "definition": "A mechanism for receiving the model's output in a predetermined format or JSON schema. This makes downstream processing in code easier. In Pydantic AI, you specify a Pydantic model with output_type.",
+      "related": [
+        "pydantic-ai"
+      ]
     },
     {
       "id": "harness",
-      "term": "ハーネス",
-      "aliases": ["agent harness", "エージェントハーネス"],
+      "term": "Harness",
+      "aliases": [
+        "agent harness"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "LLMの周りを、ループ・ツール・画面（UI）などで包み、実際に作業できるようにするプログラム。Claude CodeやPiはハーネスの例。Piは組み込みツールをread・write・edit・bashの4つに絞った薄いハーネスとして知られる。",
-      "related": ["coding-agent", "pi"]
+      "category": "Agents",
+      "definition": "A program that wraps around the LLM with a loop, tools, and interface (UI) so it can perform actual work. Claude Code and Pi are examples of a harness. Pi is known as a thin harness that narrows its built-in tools to read, write, edit, and bash.",
+      "related": [
+        "coding-agent",
+        "pi"
+      ]
     },
     {
       "id": "pi",
       "term": "Pi",
-      "aliases": ["Pi coding agent", "pi agent"],
+      "aliases": [
+        "Pi coding agent",
+        "pi agent"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "ターミナルで動くオープンソース（MITライセンス）のコーディングエージェント。最小限の機能とシステムプロンプトで構成し、利用者が拡張して使う設計。2026年10月に1.0が公開された。npmのパッケージ名は @earendil-works/pi-coding-agent。",
-      "related": ["harness", "coding-agent"]
+      "category": "Agents",
+      "definition": "An open-source coding agent that runs in the terminal (MIT license). It is composed of minimal functionality and a system prompt, and is designed so users can extend it. Version 1.0 was released in October 2026. The npm package name is @earendil-works/pi-coding-agent.",
+      "related": [
+        "harness",
+        "coding-agent"
+      ]
     },
     {
       "id": "pydantic-ai",
       "term": "Pydantic AI",
-      "aliases": ["pydantic-ai", "PydanticAI"],
+      "aliases": [
+        "pydantic-ai",
+        "PydanticAI"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "Pythonでエージェントを作るためのフレームワーク。Pydanticの型を使ってツールの引数や出力を定義でき、GeminiやOpenAIなど多くのモデルを同じ書き方で扱える。テスト用のモデルでAPIを呼ばずに動作確認できる。本講座第3回の本線。",
-      "related": ["test-model", "structured-output", "adk"]
+      "category": "Agents",
+      "definition": "A framework for building agents in Python. It allows you to define tool arguments and outputs using Pydantic types, and it supports many models such as Gemini and OpenAI with the same code style. It can also be tested without calling the real API using a test model. This is the main line of lecture 3.",
+      "related": [
+        "test-model",
+        "structured-output",
+        "adk"
+      ]
     },
     {
       "id": "adk",
-      "term": "ADK（Agent Development Kit）",
-      "aliases": ["ADK", "Agent Development Kit", "google-adk"],
+      "term": "ADK (Agent Development Kit)",
+      "aliases": [
+        "ADK",
+        "Agent Development Kit",
+        "google-adk"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "Googleが公開しているオープンソースのエージェント開発フレームワーク。Geminiとの統合が深く、adk web でツール呼び出しの流れを画面で確認できる。2.0で1.x系から破壊的変更が入っている。本講座では宿題の発展レベルで扱う。",
-      "related": ["pydantic-ai", "ai-agent"]
+      "category": "Agents",
+      "definition": "An open-source agent development framework published by Google. It is deeply integrated with Gemini, and adk web lets you visually inspect the flow of tool calls. Version 2.0 introduced breaking changes from 1.x. We cover it at the advanced homework level in this course.",
+      "related": [
+        "pydantic-ai",
+        "ai-agent"
+      ]
     },
     {
       "id": "mcp",
-      "term": "MCP（Model Context Protocol）",
-      "aliases": ["MCP", "Model Context Protocol"],
+      "term": "MCP (Model Context Protocol)",
+      "aliases": [
+        "MCP",
+        "Model Context Protocol"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "AIアプリと外部のツールやデータソースをつなぐためのオープンな標準プロトコル。MCPサーバーとして公開したツールは、対応する様々なエージェントやエディタ（MCPクライアント）から共通の方法で使える。第5回で、用語集の検索をMCPサーバーにして体験する。",
-      "related": ["tool", "ai-agent", "mcp-server", "mcp-client"]
+      "category": "Agents",
+      "definition": "An open standard protocol for connecting AI applications to external tools and data sources. Tools published as MCP servers can be used by various compatible agents and editors (MCP clients) through the same method. In lecture 5, we experience putting glossary search behind an MCP server.",
+      "related": [
+        "tool",
+        "ai-agent",
+        "mcp-server",
+        "mcp-client"
+      ]
     },
     {
       "id": "guardrail",
-      "term": "ガードレール",
-      "aliases": ["guardrail"],
+      "term": "Guardrail",
+      "aliases": [
+        "guardrail"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "エージェントが望ましくない行動や出力をしないように設ける制約や検査。指示文でのルール、ツールの権限を絞る、出力をチェックする、重要な操作の前に人の確認を挟む、などの方法がある。",
-      "related": ["human-in-the-loop", "system-prompt"]
+      "category": "Agents",
+      "definition": "Constraints or checks designed to prevent an agent from taking undesirable actions or producing poor output. Methods include rules in the prompt, limiting tool permissions, checking the output, and requiring human approval before critical actions.",
+      "related": [
+        "human-in-the-loop",
+        "system-prompt"
+      ]
     },
     {
       "id": "human-in-the-loop",
-      "term": "Human-in-the-loop",
-      "aliases": ["HITL", "人間による承認", "確認を挟む"],
+      "term": "Human-in-the-Loop",
+      "aliases": [
+        "HITL",
+        "human approval",
+        "approval step"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "エージェントの処理の途中に人の確認や承認を組み込むこと。データの書き込みや送信など、取り消しにくい操作の前に使う。Pydantic AIでは requires_approval=True を指定したツールで実現できる。",
-      "related": ["guardrail", "tool"]
+      "category": "Agents",
+      "definition": "Embedding human confirmation or approval in the middle of an agent's process. This is used before irreversible operations such as writing data or sending messages. In Pydantic AI, it can be implemented with tools that set requires_approval=True.",
+      "related": [
+        "guardrail",
+        "tool"
+      ]
     },
     {
       "id": "test-model",
       "term": "TestModel",
-      "aliases": ["テスト用モデル"],
+      "aliases": [
+        "Test model"
+      ],
       "lecture": 3,
-      "category": "エージェント",
-      "definition": "Pydantic AIに含まれるテスト用の偽モデル。実際のLLMを呼ばずに、ツールを呼び出してダミーの回答を返す。APIキーや利用枠を使わずに、エージェントの配線（ツールが登録され、呼ばれ、結果が返るか）をテストできる。",
-      "related": ["pydantic-ai", "rate-limit"]
+      "category": "Agents",
+      "definition": "A fake test model included in Pydantic AI. Instead of calling a real LLM, it triggers tool calls and returns dummy responses. This lets you test agent wiring—whether the tool is registered, called, and the result is returned—without using API keys or quota.",
+      "related": [
+        "pydantic-ai",
+        "rate-limit"
+      ]
     },
     {
       "id": "homework-levels",
-      "term": "宿題の3レベル",
-      "aliases": ["3レベル", "宿題レベル"],
+      "term": "Three Levels of Homework",
+      "aliases": [
+        "3 levels",
+        "homework levels"
+      ],
       "lecture": 1,
-      "category": "講座",
-      "definition": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
-      "related": ["answer-md"]
+      "category": "Course",
+      "definition": "The structure of homework in AIE2026: “Basic” (checking lecture content), “Implementation” (writing code yourself), and “Advanced” (research and experimentation). Completing any one level completes the homework for that lecture. Grading is generally not done.",
+      "related": [
+        "answer-md"
+      ]
     },
     {
       "id": "answer-md",
       "term": "answer.md",
-      "aliases": ["解答ファイル"],
+      "aliases": [
+        "answer file"
+      ],
       "lecture": 1,
-      "category": "講座",
-      "definition": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
-      "related": ["pull-request", "homework-levels"]
+      "category": "Course",
+      "definition": "The file in which results for each lecture's exercise or homework are written in AIE2026. It is located at lectures/NN/answer.md. Fill in the level attempted, what you did, the results, and insights, then submit it by creating a PR from your work branch to main in your fork.",
+      "related": [
+        "pull-request",
+        "homework-levels"
+      ]
     },
     {
       "id": "lec-start-tag",
-      "term": "lecNN-start タグ",
-      "aliases": ["開始タグ", "lec03-start"],
+      "term": "lecNN-start Tag",
+      "aliases": [
+        "start tag",
+        "lec03-start"
+      ],
       "lecture": 1,
-      "category": "講座",
-      "definition": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
-      "related": ["branch"]
+      "category": "Course",
+      "definition": "A Git tag in the AIE2026 course repo used to mark the starting code for each lecture exercise (for example: lec03-start). Even if a previous lecture is not complete, you can create a branch from this tag to begin that lecture's exercise.",
+      "related": [
+        "branch"
+      ]
     },
     {
       "id": "default-model",
-      "term": "既定モデル",
-      "aliases": ["デフォルトモデル", "gemini-3.5-flash-lite"],
+      "term": "Default Model",
+      "aliases": [
+        "default model",
+        "gemini-3.5-flash-lite"
+      ],
       "lecture": 1,
-      "category": "講座",
-      "definition": "AIE2026の演習と宿題で標準に使うモデルは gemini-3.5-flash-lite。無料枠のレート制限と講座運営の安定性を考えて選んでいる。環境変数 AIE_MODEL で他のモデルに切り替えてよく、自分で契約したAPIを使ってもよい。",
-      "related": ["rate-limit", "api-key"]
+      "category": "Course",
+      "definition": "The standard model used for AIE2026 exercises and homework is gemini-3.5-flash-lite. It was chosen to balance free-tier rate limits and the stability of course operations. You may switch to another model using the AIE_MODEL environment variable, or use your own paid API if you have one.",
+      "related": [
+        "rate-limit",
+        "api-key"
+      ]
     },
     {
       "id": "external-tool",
-      "term": "外部ツール",
-      "aliases": ["external tool", "外部サービス"],
+      "term": "External Tool",
+      "aliases": [
+        "external tool",
+        "external service"
+      ],
       "lecture": 5,
       "category": "MCP",
-      "definition": "Webページの取得、ファイル操作、データベース、他社のAPIなど、エージェントのプログラムの外にある機能をツールとして使うこと。第3回の関数ツールは同じプロセスの中で動くが、外部ツールはプロセスや機械をまたいで呼び出す。MCPはそのための共通の規約。",
-      "related": ["tool", "mcp", "mcp-server"]
+      "definition": "Using functionality outside the agent's program as a tool, such as fetching web pages, file operations, databases, or third-party APIs. The function tools from lecture 3 run inside the same process, while external tools are called across process or machine boundaries. MCP provides a common convention for this.",
+      "related": [
+        "tool",
+        "mcp",
+        "mcp-server"
+      ]
     },
     {
       "id": "mcp-server",
-      "term": "MCPサーバー",
-      "aliases": ["MCP server"],
+      "term": "MCP Server",
+      "aliases": [
+        "MCP server"
+      ],
       "lecture": 5,
       "category": "MCP",
-      "definition": "MCPでツール（やリソース、プロンプト）を公開する側のプログラム。公開するのはツールの名前・説明文・引数のスキーマで、クライアントの要求に応じてツールを実行し結果を返す。本講座では用語集の検索をMCPサーバーにする（app/mcp_server.py）。公開されている既製のサーバー（fetch、filesystem、GitHubなど）も多い。",
-      "related": ["mcp", "mcp-client", "mcp-transport", "fetch-server"]
+      "definition": "The program that exposes tools (and resources, prompts) through MCP. What is published is the tool name, description, and argument schema; the client requests the tool, the server executes it, and returns the result. In this course, we turn glossary search into an MCP server (app/mcp_server.py). Many packaged servers are also available (fetch, filesystem, GitHub, etc.).",
+      "related": [
+        "mcp",
+        "mcp-client",
+        "mcp-transport",
+        "fetch-server"
+      ]
     },
     {
       "id": "mcp-client",
-      "term": "MCPクライアント",
-      "aliases": ["MCP client", "MCPホスト"],
+      "term": "MCP Client",
+      "aliases": [
+        "MCP client",
+        "MCP host"
+      ],
       "lecture": 5,
       "category": "MCP",
-      "definition": "MCPサーバーに接続し、公開されたツールをモデルに渡して、モデルの指示でツールを呼び出す側。エージェントのプログラム（Pydantic AIの MCPToolset）や、Copilot Chat・Claude Desktop・Cursorなどのエディタやアプリがクライアントになる。同じサーバーをどのクライアントからも使えるのがMCPの利点。",
-      "related": ["mcp", "mcp-server", "mcp-config"]
+      "definition": "The side that connects to an MCP server, passes the published tools to the model, and calls tools according to the model's instructions. An agent program (such as Pydantic AI's MCPToolset) or editors/apps such as Copilot Chat, Claude Desktop, and Cursor can act as clients. The advantage of MCP is that the same server can be used from any client.",
+      "related": [
+        "mcp",
+        "mcp-server",
+        "mcp-config"
+      ]
     },
     {
       "id": "mcp-transport",
-      "term": "トランスポート（stdio・Streamable HTTP）",
-      "aliases": ["stdio", "Streamable HTTP", "transport", "MCPのトランスポート"],
+      "term": "Transport (stdio / Streamable HTTP)",
+      "aliases": [
+        "stdio",
+        "Streamable HTTP",
+        "transport",
+        "MCP transport"
+      ],
       "lecture": 5,
       "category": "MCP",
-      "definition": "MCPのクライアントとサーバーがやりとりする経路。stdioでは、クライアントがサーバーをサブプロセスとして起動し、標準入出力でメッセージを交換する（手軽で、同じ機械の中で使う）。Streamable HTTPでは、サーバーがURLで待ち受け、別のプロセスや別の機械から接続できる（公開範囲と認証を考える必要がある）。",
-      "related": ["mcp-server", "mcp-client"]
+      "definition": "The communication path between the MCP client and server. In stdio mode, the client starts the server as a subprocess and exchanges messages over standard input/output (simple and convenient for use on the same machine). In Streamable HTTP mode, the server listens at a URL and can be accessed from other processes or machines (requiring attention to exposure and authentication).",
+      "related": [
+        "mcp-server",
+        "mcp-client"
+      ]
     },
     {
       "id": "mcp-config",
-      "term": "mcpServers設定",
-      "aliases": ["mcpServers", "MCPの設定ファイル", "mcp_servers.json", "mcp.json"],
+      "term": "mcpServers Configuration",
+      "aliases": [
+        "mcpServers",
+        "MCP configuration file",
+        "mcp_servers.json",
+        "mcp.json"
+      ],
       "lecture": 5,
       "category": "MCP",
-      "definition": "使うMCPサーバーを列挙する設定ファイル。サーバーごとに名前と、起動コマンド（stdio）または接続先URL（HTTP）を書く。Claude Desktop、Cursor、Pydantic AIなどが同じ mcpServers 形式を読む（VS Code / Copilot Chatは servers 形式）。本講座では app/mcp_servers.json。設定を数行足すだけでツールが増えるのがMCPの体験の核心。",
-      "related": ["mcp-client", "tool-namespace"]
+      "definition": "A configuration file listing the MCP servers to use. For each server, write its name and startup command (stdio) or connection URL (HTTP). Claude Desktop, Cursor, and Pydantic AI read the same mcpServers format (VS Code / Copilot Chat uses the servers format instead). In this course, the file is app/mcp_servers.json. The core MCP experience is that adding a few lines of configuration increases the available tools.",
+      "related": [
+        "mcp-client",
+        "tool-namespace"
+      ]
     },
     {
       "id": "tool-namespace",
-      "term": "ツールの名前空間",
-      "aliases": ["ツール名のプレフィックス", "prefix", "名前の衝突"],
+      "term": "Tool Namespace",
+      "aliases": [
+        "tool name prefix",
+        "prefix",
+        "name collision"
+      ],
       "lecture": 5,
       "category": "MCP",
-      "definition": "複数のMCPサーバーを使うとき、同じ名前のツールを区別するために「サーバー名_ツール名」のように接頭辞を付けること。本講座の app/agent.py は設定ファイルのサーバー名を自動で付ける（例: glossary_search_glossary。Pydantic AIの load_mcp_toolsets も同じ）。ツールが増えるほどモデルに渡す説明文も増え、呼び分けの精度とトークン数に影響する。",
-      "related": ["mcp-config", "tool-description", "rate-limit"]
+      "definition": "When multiple MCP servers are used, the same tool names are distinguished by prefixing them with the server name as server_name_tool_name. In this course, app/agent.py automatically adds the server name from the config file (e.g., glossary_search_glossary). Pydantic AI's load_mcp_toolsets does the same. As the number of tools increases, the descriptions passed to the model also increase, which affects both tool selection accuracy and token usage.",
+      "related": [
+        "mcp-config",
+        "tool-description",
+        "rate-limit"
+      ]
     },
     {
       "id": "fetch-server",
-      "term": "fetchサーバー",
-      "aliases": ["mcp-server-fetch", "fetch", "Web取得ツール"],
+      "term": "fetch Server",
+      "aliases": [
+        "mcp-server-fetch",
+        "fetch",
+        "Web fetch tool"
+      ],
       "lecture": 5,
       "category": "MCP",
-      "definition": "指定したURLのページを取得し、本文をMarkdownにして返す既製のMCPサーバー（Python製、uvx mcp-server-fetch で起動）。本講座では「設定ファイルに書くだけで外部ツールが増える」例として使う。モデルが選んだURLに実際にアクセスするので、どこへ何を送るかは利用者が把握しておく。",
-      "related": ["mcp-server", "external-tool", "guardrail"]
+      "definition": "A prebuilt MCP server that retrieves the specified URL page and returns the body as Markdown (Python-based, started with uvx mcp-server-fetch). In this course, it is used as an example of “adding external tools just by writing in the config file.” Because the model accesses the URL it selects, the user must be aware of where data is being sent.",
+      "related": [
+        "mcp-server",
+        "external-tool",
+        "guardrail"
+      ]
     }
   ]
 }
