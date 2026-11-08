@@ -5,10 +5,13 @@
 """
 
 import json
+import random
+from datetime import datetime
 from functools import cache
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+LEARNING_LOG_DIR = Path(__file__).resolve().parent.parent / "learning_log"
 MAX_RESULTS = 3
 
 
@@ -29,10 +32,10 @@ def _names(entry: dict) -> list[str]:
 
 
 def search_glossary(query: str) -> str:
-    """講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。
+    """講座の用語集から用語を検索し、定義・対象の回・関連用語を返す。
 
-    AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について
-    答える前に使うこと。query には調べたい用語を1つだけ入れる（例: "LoRA"）。
+    AIE2026の講義内容やAIエンジニアリング用語について、意味を説明したり比較したり
+    するときに使う。query には用語を1つだけ指定する（例: "LoRA"）。
     """
     q = _normalize(query)
     if not q:
@@ -68,12 +71,47 @@ def search_glossary(query: str) -> str:
 
 
 def get_lecture_summary(lecture: int) -> str:
-    """指定した回（1始まりの整数）の講義の要点を返す。
+    """指定した回（1始まりの整数）の講義資料を返す。
 
-    「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。
+    「第N回では何を学ぶ？」など、特定の回の内容や扱う話題を尋ねられたときに使う。
     """
     path = DATA_DIR / "lectures" / f"{lecture:02d}.md"
     if not path.exists():
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
+
+def make_quiz(lecture: int) -> str:
+    """指定した回の用語集から復習問題を1問作り、問題と答えを返す。
+
+    学習者が特定の回の復習問題・確認問題・クイズを求めたときに使う。
+    lecture には対象の回（1始まりの整数）を指定する。返り値には答えも含まれるため、
+    学習者が答えを求めていない場合は問題文だけを提示する。
+    """
+    terms = [entry for entry in load_glossary() if entry["lecture"] == lecture]
+    if not terms:
+        return f"第{lecture}回の用語が用語集に見つかりませんでした。"
+
+    entry = random.choice(terms)
+    return f"質問:「{entry['term']}」とは何ですか？\n答え:{entry['definition']}"
+
+
+def save_learning_log(record: str) -> str:
+    """学習者の学習記録を learning_log/learning_log.md に追記する。
+
+    学習者から、学んだこと・疑問・進捗などを記録するよう頼まれたときに使う。
+    保存は元に戻しにくいため、実行前に必ず本人の承認を得る。
+    """
+    content = record.strip()
+    if not content:
+        raise ValueError("保存する学習記録が空です。")
+
+    LEARNING_LOG_DIR.mkdir(parents=True, exist_ok=True)
+    log_path = LEARNING_LOG_DIR / "learning_log.md"
+    timestamp = datetime.now().astimezone().isoformat(timespec="seconds")
+    with log_path.open("a", encoding="utf-8") as f:
+        f.write(f"## {timestamp}\n\n{content}\n\n")
+
+    return f"学習記録を {log_path.relative_to(LEARNING_LOG_DIR.parent)} に保存しました。"

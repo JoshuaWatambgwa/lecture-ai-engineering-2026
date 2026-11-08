@@ -2,6 +2,8 @@
 
 import json
 
+import pytest
+
 from app import tools
 
 
@@ -37,6 +39,41 @@ def test_search_reports_not_found():
 def test_lecture_summary():
     assert "エージェント" in tools.get_lecture_summary(3)
     assert "まだありません" in tools.get_lecture_summary(99)
+
+
+def test_make_quiz_uses_a_term_from_the_requested_lecture():
+    terms = [entry for entry in tools.load_glossary() if entry["lecture"] == 3]
+    result = tools.make_quiz(3)
+
+    assert any(
+        f"「{entry['term']}」とは何ですか？" in result
+        and entry["definition"] in result
+        for entry in terms
+    )
+
+
+def test_make_quiz_reports_when_lecture_has_no_terms():
+    assert "見つかりませんでした" in tools.make_quiz(99)
+
+
+def test_save_learning_log_appends_records(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "LEARNING_LOG_DIR", tmp_path / "learning_log")
+
+    result = tools.save_learning_log("  Reviewed embeddings.  ")
+    log = (tmp_path / "learning_log" / "learning_log.md").read_text(encoding="utf-8")
+
+    assert "learning_log/learning_log.md" in result
+    assert "## " in log
+    assert "Reviewed embeddings." in log
+
+
+def test_save_learning_log_rejects_empty_record(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "LEARNING_LOG_DIR", tmp_path / "learning_log")
+
+    with pytest.raises(ValueError, match="空です"):
+        tools.save_learning_log(" \n ")
+
+    assert not (tmp_path / "learning_log").exists()
 
 
 def test_default_question_of_lecture1_is_answerable_from_glossary():
