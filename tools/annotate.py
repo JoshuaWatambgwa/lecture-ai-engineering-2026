@@ -1,5 +1,10 @@
 """第4回: 評価セットにラベルを付ける画面（Streamlit）。
-
+⠴ Resolving dependencies...                                                                                  error: Request failed after 3 retries in 46.0s
+  cause: Failed to fetch: https://pypi.org/simple/streamlit/
+  cause: error sending request for url (https://pypi.org/simple/streamlit/)
+  cause: client error (Connect)
+  cause: operation timed out
+(aie2026-exercises) @JoshuaWatambgwa ➜ /workspaces/lecture-ai-engineering-2026 (lec04) $ 
 使い方:
     uv run --with streamlit==1.66.1 streamlit run tools/annotate.py
 
